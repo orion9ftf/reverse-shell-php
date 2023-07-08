@@ -70,7 +70,7 @@ Nos ahorramos todo esto y buscamos el repositorio en:
 
 `pentestmonkey/php-reverse-shell`
 
-Link: (pentestmonkey/php-reverse-shell)[https://github.com/pentestmonkey/php-reverse-shell]
+Link: [pentestmonkey/php-reverse-shell](https://github.com/pentestmonkey/php-reverse-shel)
 
 Nos traemos el archivo: `php-reverse-shell.php` con raw
 
