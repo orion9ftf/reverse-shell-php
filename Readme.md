@@ -121,3 +121,20 @@ $ export TERM=xterm
 ...
 ```
 
+### ¿Cómo se realiza el tratamiento de la TTY?
+
+Ya con los pasos anteriores podemos hacer lo siguiente:
+
+```sh
+$ script /dev/null -c bash
+
+# luego con ctrl + z
+
+$ stty raw -echo;fg
+[1] + continued nc -nlvp 444
+                          reset xterm
+# si nos da un error podemos ejecutar lo siguiente:
+$ export TERM=xterm
+# ya con este tratamiento de interactividad nos funciona todo.
+```
+
